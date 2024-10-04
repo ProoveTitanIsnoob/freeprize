@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jagob's prize claiming center</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #1a0000;
+            color: #ff6666;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            background-color: #ff3333;
+            color: #1a0000;
+            border: none;
+            border-radius: 5px;
+        }
+        #fullscreenImage {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome! Click below me to claim a prize!</h1>
+		<h2>WARNING⚠: prize not recommended for </h2>
+			<h3> people who are allergic to cute things,</h3>
+						<h3>people who fall in love easily</h3>
+    <button onclick="unleashBeast()">Click here to get prize!</button>
+    <img id="fullscreenImage" src="squish.gif" alt="Unleashed Beast">
+	<audio id="beastAudio" src="sloth22.ogg" loop autoplay></audio>
+
+    <script>
+        function unleashBeast() {
+            const img = document.getElementById('fullscreenImage');
+            const audio = document.getElementById('beastAudio');
+            
+            img.style.display = 'block';
+            img.requestFullscreen().then(() => {
+                audio.play();
+            }).catch((err) => {
+                console.error(`Error attempting to enable fullscreen mode: ${err.message}`);
+            });
+        }
+
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement) {
+                const img = document.getElementById('fullscreenImage');
+                const audio = document.getElementById('beastAudio');
+                img.style.display = 'none';
+                audio.pause();
+                audio.currentTime = 0;
+            }
+        });
+    </script>
+</body>
+</html>
